@@ -101,7 +101,7 @@ namespace Player {
 		}
 
 		private void FixedUpdate() {
-			Vector3 vel = Globals.CurrentGravityController.Adjust(rb.velocity);
+			Vector3 vel = Globals.CurrentGravityController.Adjust(rb.linearVelocity);
 			bool onGround = groundDetector.Check(transform.position, out float groundDistance);
 			bool nearGround = groundDistance < m_moveData.nearGroundDistance;
 			
@@ -112,7 +112,7 @@ namespace Player {
 			JumpTick(ref vel, onGround, nearGround, inputIsNeutral);
 			VelocityTick(ref vel, onGround, inputIsNeutral);
 
-			rb.velocity = Globals.CurrentGravityController.Apply(vel);
+			rb.linearVelocity = Globals.CurrentGravityController.Apply(vel);
 			StuckTick(vel, onGround);
 			GravityTick(onGround);
 
@@ -357,9 +357,9 @@ namespace Player {
 
 					if (newDirectionID != -1) {
 						if (newDirectionID != gravityController.Direction) {
-							Vector3 vel = gravityController.Adjust(rb.velocity);
+							Vector3 vel = gravityController.Adjust(rb.linearVelocity);
 							if (vel.y < 0) vel.y = 0;
-							rb.velocity = gravityController.Apply(vel);
+							rb.linearVelocity = gravityController.Apply(vel);
 
 							gravityController.ChangeDirection(newDirectionID);
 							
@@ -376,9 +376,9 @@ namespace Player {
 			}
 
 			if (gravitySwitchFloatTick == -1) {
-				Vector3 vel = Globals.CurrentGravityController.Adjust(rb.velocity);
+				Vector3 vel = Globals.CurrentGravityController.Adjust(rb.linearVelocity);
 				vel.y += Gravity.AmountPerTick;
-				rb.velocity = Globals.CurrentGravityController.Apply(vel);
+				rb.linearVelocity = Globals.CurrentGravityController.Apply(vel);
 			}
 			
 

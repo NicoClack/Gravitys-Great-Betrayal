@@ -97,7 +97,7 @@ public class Health : MonoBehaviour {
 
 	public void SoftRespawn() {
 		transform.position = safeRespawnHistory[^1];
-		rb.velocity = Vector3.zero;
+		rb.linearVelocity = Vector3.zero;
 
 		softRespawnEvent.Invoke();
 	}
@@ -105,7 +105,7 @@ public class Health : MonoBehaviour {
 		deathEvent.Invoke();
 		if (m_onDeath == DeathMode.Respawn) {
 			transform.position = RespawnLocation;
-			rb.velocity = Vector3.zero;
+			rb.linearVelocity = Vector3.zero;
 
 			CurrentHealth = m_startHealth;
 			IsSafe = true;

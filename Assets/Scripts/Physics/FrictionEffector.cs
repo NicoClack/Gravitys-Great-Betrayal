@@ -6,10 +6,10 @@ namespace PhysicsTools {
 	public class FrictionEffector : MonoBehaviour {
 		[SerializeField] private bool m_preventWallFriction = true;
 		[SerializeField] private bool m_manageByScript = false;
-		[SerializeField] private PhysicMaterial m_frictionlessMaterial;
+		[SerializeField] private PhysicsMaterial m_frictionlessMaterial;
 		[SerializeField] private LayerMask m_groundLayers;
 
-		private PhysicMaterial frictionMaterial;
+		private PhysicsMaterial frictionMaterial;
 		private Util.GroundDetector groundDetector;
 		private GravityEffector gravityEffector;
 

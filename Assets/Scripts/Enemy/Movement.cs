@@ -103,7 +103,7 @@ namespace Enemy {
 
 		private bool MoveTick(Vector3 playerDistance, Vector3 playerDirection, bool onGround) {
 			Gravity gravityController = Globals.CurrentGravityController;
-			Vector3 vel = gravityController.Adjust(rb.velocity, gravityEffector.InPlayerGravity);
+			Vector3 vel = gravityController.Adjust(rb.linearVelocity, gravityEffector.InPlayerGravity);
 
 			Vector3 adjustedDistanceVec = gravityController.Adjust(playerDistance, gravityEffector.InPlayerGravity);
 			float horizontalDistance;
@@ -145,7 +145,7 @@ namespace Enemy {
 			}
 
 			currentTurnAmount = Util.GetHorizontalTurnAmount(vel, adjustedDirection);
-			rb.velocity = gravityController.Apply(vel, gravityEffector.InPlayerGravity);
+			rb.linearVelocity = gravityController.Apply(vel, gravityEffector.InPlayerGravity);
 			m_visibleController.LookAngle = Util.GetLookAngle(adjustedDirection, gravityController.GetEffectiveDirection(gravityEffector));
 
 			return true;
@@ -177,9 +177,9 @@ namespace Enemy {
 			}
 		}
 		private void CapSpeed() {
-			Vector3 vel = Globals.CurrentGravityController.Adjust(rb.velocity, gravityEffector.InPlayerGravity);
+			Vector3 vel = Globals.CurrentGravityController.Adjust(rb.linearVelocity, gravityEffector.InPlayerGravity);
 			vel = Util.LimitXZ(vel, m_moveData.maxSpeed);
-			rb.velocity = Globals.CurrentGravityController.Apply(vel, gravityEffector.InPlayerGravity);
+			rb.linearVelocity = Globals.CurrentGravityController.Apply(vel, gravityEffector.InPlayerGravity);
 		}
 	}
 }

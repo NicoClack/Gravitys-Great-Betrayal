@@ -23,13 +23,13 @@ namespace PhysicsTools {
 		}
 
 		private void FixedUpdate() {
-			Vector3 vel = rb.velocity;
+			Vector3 vel = rb.linearVelocity;
 
 			if (InPlayerGravity) {
 				vel += Globals.CurrentGravityController.AccelerationPerTick;
 			}
 
-			rb.velocity = vel;
+			rb.linearVelocity = vel;
 		}
 
 		private void UpdateGravityPhysics(bool _inPlayerGravity) {
